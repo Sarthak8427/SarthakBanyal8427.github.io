@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sarthak Banyal — Thor × Iron Man</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07080f;--fg:#f4f6ff;--mut:rgba(244,246,255,.7);--panel:rgba(14,18,34,.8);--line:rgba(255,255,255,.16);--red:#e5202e;--gold:#ffc233;--blue:#38bdf8;--ice:#e0f2fe;--arc:#67e8f9;--ease:cubic-bezier(.16,1,.3,1);--spring:cubic-bezier(.34,1.56,.64,1);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#e8ecf4;--fg:#10121c;--mut:rgba(16,18,28,.72);--panel:rgba(255,255,255,.78);--line:rgba(16,18,28,.18);color-scheme:light}}
+body{--p:var(--red);--s:var(--blue)}
+body[data-mode=iron]{--p:var(--red);--s:var(--gold)}
+body[data-mode=thor]{--p:var(--blue);--s:var(--ice)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:70px}
+body{background:var(--bg);color:var(--fg);font:500 18px/1.5 'Rajdhani',system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body:not(.live){overflow:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.px{font-family:'Press Start 2P',monospace}
+.pn{background:var(--panel);clip-path:polygon(16px 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%,0 16px);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--p) 60%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+body::after{content:"";position:fixed;inset:0;z-index:150;pointer-events:none;background:repeating-linear-gradient(transparent 0 2px,rgba(0,0,0,.14) 2px 3px),radial-gradient(circle,transparent 55%,rgba(0,0,0,.45))}
+#fx{position:fixed;inset:0;width:100%;height:100%;z-index:140;pointer-events:none}
+.shake{animation:shk .4s}
+@keyframes shk{20%{translate:-8px 4px}40%{translate:7px -5px}60%{translate:-5px -3px}80%{translate:4px 3px}}
+/* INTRO */
+#intro{position:fixed;inset:0;z-index:1000;background:#000;overflow:hidden;font-family:'Orbitron',sans-serif;color:#fff}
+#intro.out{opacity:0;visibility:hidden;transition:opacity .9s,visibility .9s}
+.ph{position:absolute;inset:0;display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .2s}
+.ph.on{opacity:1;pointer-events:auto}
+#mont{display:grid;grid-template-columns:repeat(var(--c,8),1fr);grid-template-rows:repeat(var(--r,5),1fr);width:100%;height:100%}
+.t{position:relative;display:grid;place-items:center;overflow:hidden;font:400 clamp(1.1rem,4.2vw,2.8rem)/1 'Bebas Neue',sans-serif;letter-spacing:.04em;border:1px solid #000;color:#fff}
+.t::after{content:attr(data-w);rotate:-6deg;text-shadow:2px 2px 0 #000;text-align:center;padding:0 4px}
+.t.f{animation:fp .22s ease-out}
+@keyframes fp{from{transform:perspective(500px) rotateY(90deg);filter:brightness(3)}to{transform:none;filter:none}}
+.v0{background:radial-gradient(rgba(0,0,0,.35) 1px,transparent 1.6px) 0 0/7px 7px,linear-gradient(135deg,#e5202e,#6d0a12)}
+.v1{background:radial-gradient(rgba(0,0,0,.3) 1px,transparent 1.6px) 0 0/7px 7px,linear-gradient(135deg,#38bdf8,#0b3a7a)}
+.v2{background:radial-gradient(rgba(0,0,0,.25) 1px,transparent 1.6px) 0 0/7px 7px,linear-gradient(135deg,#ffc233,#c2410c);color:#111}
+.v3{background:repeating-linear-gradient(45deg,#111 0 10px,#1b1f33 10px 20px)}
+.v4{background:#f4f1e8;color:#111}.v4::after{text-shadow:2px 2px 0 #e5202e}
+.v5{background:linear-gradient(100deg,#e5202e 50%,#38bdf8 50%)}
+#p0{gap:26px;align-content:center;text-align:center;padding:24px}
+#p0 .k{font:400 clamp(.6rem,2.6vw,.9rem)/1.8 'Press Start 2P',monospace;color:#9aa3c7}
+#go{font:400 clamp(1rem,5vw,1.9rem)/1 'Press Start 2P',monospace;padding:20px 26px;border:3px solid #fff;background:#000;color:#ffc233;animation:blink 1s steps(2) infinite;box-shadow:6px 6px 0 #e5202e,-6px -6px 0 #38bdf8}
+@keyframes blink{50%{opacity:.35}}
+#p2 .lg{position:relative;overflow:hidden;background:#e5202e;color:#fff;font:400 clamp(2.6rem,10.5vw,7.5rem)/1 'Bebas Neue',sans-serif;letter-spacing:.03em;padding:.08em .3em .02em;white-space:nowrap;transform:scaleX(0)}
+#p2.on .lg{animation:lgin .55s var(--ease) forwards}
+@keyframes lgin{to{transform:scaleX(1)}}
+#p2 .lg::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 35%,rgba(255,255,255,.65) 50%,transparent 65%);translate:-120% 0}
+#p2.on .lg::after{animation:shn 1s .6s forwards}
+@keyframes shn{to{translate:120% 0}}
+#p2 .pr{position:absolute;bottom:30%;letter-spacing:.6em;font-size:clamp(.6rem,2.4vw,.9rem);color:#9aa3c7;opacity:0}
+#p2.on .pr{animation:fi .6s 1s forwards}
+@keyframes fi{to{opacity:1}}
+#p3{text-align:center}
+#p3 .ttl{font:400 clamp(3.6rem,18vw,12rem)/.88 'Bebas Neue',sans-serif;overflow:hidden}
+#p3 .a,#p3 .b{display:block;-webkit-background-clip:text;background-clip:text;color:transparent;translate:-120vw 0}
+#p3 .a{background-image:linear-gradient(#ffd76a,#e5202e);filter:drop-shadow(0 0 16px rgba(229,32,46,.7))}
+#p3 .b{background-image:linear-gradient(#fff,#38bdf8);filter:drop-shadow(0 0 16px rgba(56,189,248,.8));translate:120vw 0}
+#p3 .x{display:block;font-size:.38em;color:#fff;scale:0;rotate:-180deg}
+#p3.on .a{animation:sl .5s var(--spring) .05s forwards}
+#p3.on .b{animation:sl .5s var(--spring) .45s forwards}
+#p3.on .x{animation:pp .5s var(--spring) .3s forwards}
+@keyframes sl{to{translate:0 0}}@keyframes pp{to{scale:1;rotate:0deg}}
+#p3 .sb{margin-top:18px;letter-spacing:.5em;font-size:clamp(.6rem,2.6vw,1rem);color:#9aa3c7;opacity:0}
+#p3.on .sb{animation:fi .6s 1s forwards}
+#p4{align-content:center;gap:18px;text-align:left;padding:24px}
+#p4 .rxb{width:min(220px,52vw);aspect-ratio:1;color:var(--arc);filter:drop-shadow(0 0 18px var(--arc));margin:0 auto}
+#p4 .ln{font:500 clamp(.7rem,2.8vw,.95rem)/1.9 'Orbitron',sans-serif;color:#9eeaf9;min-height:7.6em;width:min(420px,88vw)}
+#p4 .ln div{opacity:0;animation:fi .2s forwards}
+#p4 .pb{width:min(420px,88vw);height:10px;border:1px solid var(--arc);padding:2px}
+#p4 .pb i{display:block;height:100%;width:0;background:linear-gradient(90deg,#e5202e,#ffc233,#38bdf8);transition:width 1.9s linear}
+#fl{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+#fl.on{animation:fls .5s}
+@keyframes fls{0%{opacity:1}100%{opacity:0}}
+#skip{position:absolute;top:calc(env(safe-area-inset-top,0px) + 14px);right:14px;z-index:5;font:400 .6rem 'Press Start 2P',monospace;padding:10px 12px;border:2px solid #556;color:#aab;display:none}
+/* HUD */
+#hud{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 8px) 12px 8px;background:linear-gradient(rgba(5,6,12,.92),transparent);color:#f4f6ff}
+.hl{display:flex;align-items:center;gap:10px;min-width:0}
+.av{width:38px;height:38px;color:var(--arc);filter:drop-shadow(0 0 6px var(--arc));animation:spin 8s linear infinite;flex:none}
+@keyframes spin{to{rotate:360deg}}
+.hl b{font:400 .55rem 'Press Start 2P',monospace;display:block;white-space:nowrap}
+.bars{display:grid;gap:3px;margin-top:5px;width:clamp(90px,24vw,190px)}
+.bar{height:7px;border:1px solid rgba(255,255,255,.5);padding:1px}
+.bar i{display:block;height:100%;transform-origin:left}
+.hp i{width:100%;background:linear-gradient(90deg,#e5202e,#ffc233);animation:pls 2s ease-in-out infinite}
+@keyframes pls{50%{filter:brightness(1.5)}}
+.xp i{width:100%;background:linear-gradient(90deg,#38bdf8,#e0f2fe);transform:scaleX(0)}
+#lvl{font:400 .55rem 'Press Start 2P',monospace;color:var(--gold);text-align:center}
+.hr{display:flex;align-items:center;gap:10px;font:400 .55rem 'Press Start 2P',monospace;white-space:nowrap}
+#snd{font-size:18px}
+/* hotbar */
+#hb{position:fixed;left:50%;translate:-50% 0;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);z-index:60;display:flex;gap:4px;padding:5px;background:rgba(5,6,12,.82);border:2px solid #2b3150;border-radius:6px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.sl{position:relative;width:clamp(31px,9vw,42px);height:clamp(31px,9vw,42px);display:grid;place-items:center;font:400 .6rem 'Press Start 2P',monospace;color:#aab;border:2px solid #2b3150;background:#0d1020;transition:transform .35s var(--spring),border-color .2s,color .2s}
+.sl:hover{transform:translateY(-4px)}
+.sl.on{border-color:var(--s);color:#fff;transform:translateY(-6px);box-shadow:0 0 14px var(--s),inset 0 0 8px var(--s)}
+.sl span{position:absolute;bottom:130%;left:50%;translate:-50% 6px;opacity:0;white-space:nowrap;font:400 .5rem 'Press Start 2P',monospace;background:#000;color:var(--gold);padding:6px 8px;border:1px solid var(--gold);pointer-events:none;transition:.25s}
+.sl:hover span{opacity:1;translate:-50% 0}
+#toast{position:fixed;top:calc(env(safe-area-inset-top,0px) + 72px);left:50%;translate:-50% -20px;scale:.5;opacity:0;z-index:70;text-align:center;font:400 .7rem/1.8 'Press Start 2P',monospace;color:#fff;padding:14px 20px;background:#000;border:3px solid var(--gold);box-shadow:5px 5px 0 var(--p);pointer-events:none;transition:opacity .25s,translate .5s var(--spring),scale .5s var(--spring);white-space:nowrap}
+#toast.show{opacity:1;translate:-50% 0;scale:1}
+#toast small{display:block;color:var(--gold);font-size:.5rem}
+/* sections */
+section,header.hero{position:relative;z-index:2}
+header.hero{min-height:100svh;display:grid;place-items:center;text-align:center;padding:14vh 18px 16vh;overflow:hidden}
+.reactor{position:absolute;left:50%;top:50%;width:min(86vmin,760px);translate:-50% -50%;color:var(--arc);opacity:.32;filter:drop-shadow(0 0 22px var(--arc));pointer-events:none}
+.reactor g{transform-box:fill-box;transform-origin:center}
+.r1{animation:spin 30s linear infinite}.r2{animation:spin 14s linear reverse infinite}.r3{animation:spin 9s linear infinite}
+.reactor .core{animation:pls 1.6s ease-in-out infinite}
+#hc{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;gap:18px;will-change:transform,opacity}
+.sel{font:400 clamp(.55rem,2.4vw,.8rem) 'Press Start 2P',monospace;color:var(--gold);animation:blink 1.2s steps(2) infinite}
+.name{font:400 clamp(4.2rem,19vw,12.5rem)/.86 'Bebas Neue',sans-serif;letter-spacing:.01em}
+.g{display:block;position:relative;background:linear-gradient(180deg,#fff 10%,var(--s) 55%,var(--p));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 18px color-mix(in srgb,var(--p) 55%,transparent))}
+.g::before,.g::after{content:attr(data-t);position:absolute;inset:0;-webkit-text-fill-color:currentColor;background:none}
+.g::before{color:var(--s);clip-path:inset(0 0 100% 0);animation:gl 3.2s steps(1) infinite}
+.g::after{color:var(--p);clip-path:inset(100% 0 0 0);animation:gl 3.2s steps(1) infinite reverse}
+@keyframes gl{0%,88%{clip-path:inset(0 0 100% 0);translate:0}90%{clip-path:inset(20% 0 55% 0);translate:-6px 0}93%{clip-path:inset(60% 0 12% 0);translate:6px 0}96%{clip-path:inset(40% 0 40% 0);translate:-3px 0}100%{clip-path:inset(0 0 100% 0);translate:0}}
+body:not(.live) .name,body:not(.live) .cls,body:not(.live) .duo,body:not(.live) .sheet{opacity:0}
+body.live .name{animation:drop .9s var(--spring)}
+@keyframes drop{from{opacity:0;scale:2.4;filter:blur(14px)}}
+.cls{font:700 clamp(.85rem,3vw,1.2rem) 'Orbitron',sans-serif;letter-spacing:.2em;color:var(--mut);max-width:760px}
+.duo{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.hb{font:400 .6rem 'Press Start 2P',monospace;padding:14px 16px;border:3px solid #fff;background:#000;color:#fff;box-shadow:4px 4px 0 var(--c);transition:transform .25s var(--spring)}
+.hb:hover{transform:translate(-2px,-2px)}.hb:active{transform:translate(3px,3px);box-shadow:none}
+.hb[data-m=iron]{--c:var(--red)}.hb[data-m=thor]{--c:var(--blue)}.hb[data-m=dual]{--c:var(--gold)}
+body[data-mode=dual] .hb[data-m=dual],body[data-mode=iron] .hb[data-m=iron],body[data-mode=thor] .hb[data-m=thor]{background:var(--c);color:#000}
+.sheet{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:min(620px,100%);margin-top:6px}
+.sheet div{padding:14px 8px;text-align:center}
+.sheet b{display:block;font:900 clamp(1.4rem,6vw,2.3rem) 'Orbitron',sans-serif;color:var(--s)}
+.sheet span{font:400 .5rem/1.6 'Press Start 2P',monospace;color:var(--mut)}
+.sheet small{display:block;font-size:.8rem;margin-top:8px;color:var(--mut)}
+.scr{font:400 .6rem 'Press Start 2P',monospace;color:var(--gold);margin-top:8px;animation:blink 1s steps(2) infinite}
+.lv{max-width:1120px;margin:0 auto;padding:110px 20px 70px}
+.lvt{margin-bottom:34px}
+.lvt small{font:400 .65rem 'Press Start 2P',monospace;color:var(--gold);display:block;margin-bottom:10px}
+.lvt b{display:block;font:400 clamp(3.2rem,12vw,8rem)/.9 'Bebas Neue',sans-serif;letter-spacing:.01em;text-shadow:4px 0 var(--p),-4px 0 var(--s);transform-origin:left}
+.lvt.in b{animation:slam .7s var(--spring)}
+@keyframes slam{from{opacity:0;scale:2.2;rotate:-3deg}60%{translate:0 6px}}
+.rv{opacity:0;translate:0 44px;scale:.95;transition:opacity .7s,translate .9s var(--spring),scale .9s var(--spring);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;translate:0 0;scale:1}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.cd{position:relative;padding:26px 24px;transition:transform .35s var(--spring),filter .3s}
+.cd:hover{transform:translateY(-6px) rotate(-.6deg);filter:drop-shadow(0 0 14px color-mix(in srgb,var(--p) 55%,transparent))}
+.tg{font:400 .55rem/1.6 'Press Start 2P',monospace;color:var(--gold)}
+.cd h3{font:700 1.45rem/1.15 'Orbitron',sans-serif;margin:10px 0}
+.cd h3.sm{font-size:1.05rem}
+.cd p,.cd li{color:var(--mut);font-size:1.02rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.chip{padding:3px 10px;font-weight:700;font-size:.9rem;border:1.5px solid var(--s);color:var(--fg);background:color-mix(in srgb,var(--s) 12%,transparent);transition:transform .3s var(--spring),background .2s,color .2s}
+.chip:hover{transform:translateY(-3px) rotate(-3deg);background:var(--s);color:#000}
+#dlg{display:flex;gap:18px;align-items:flex-start;padding:26px;cursor:pointer}
+#dlg .pt{flex:none;width:86px;height:86px;border:3px solid var(--s);display:grid;place-items:center;background:#000;color:var(--arc)}
+#dlg .pt svg{width:60px;height:60px;animation:spin 8s linear infinite}
+#dlg .nm{font:400 .65rem 'Press Start 2P',monospace;color:var(--gold);margin-bottom:12px}
+#dtxt{font-size:clamp(1.1rem,2.6vw,1.45rem);line-height:1.5;min-height:9em}
+#dnext{display:inline-block;color:var(--s);opacity:0;animation:blink .8s steps(2) infinite}#dnext.on{opacity:1}
+.chips.big{margin-top:22px}
+.st{display:inline-block;font:400 .5rem 'Press Start 2P',monospace;padding:6px 8px;margin-left:8px;vertical-align:middle;background:var(--s);color:#000}
+.st.ok{background:#4ade80}
+.q{margin-bottom:18px}
+.q ul{list-style:none;display:grid;gap:7px;margin-top:10px}
+.q li::before{content:"▸ ";color:var(--s)}
+.q .lt{margin-top:14px;font:400 .55rem/1.8 'Press Start 2P',monospace;color:var(--gold)}
+.hpb{height:14px;border:2px solid #fff;padding:2px;margin-top:16px;background:#000}
+.hpb i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#e5202e,#ffc233);transition:width 2.6s cubic-bezier(.5,0,.2,1) .5s}
+.boss.in .hpb i{width:0}
+.boss .df{font:400 .5rem 'Press Start 2P',monospace;color:#4ade80;margin-top:8px;opacity:0;transition:opacity .3s 3s}.boss.in .df{opacity:1}
+.boss{cursor:crosshair;user-select:none}
+.boss.hit{animation:hit .3s}
+@keyframes hit{25%{translate:-8px 0;filter:brightness(2.2) hue-rotate(-30deg)}50%{translate:8px 0}}
+.dmg{position:fixed;z-index:145;font:400 1rem 'Press Start 2P',monospace;color:var(--gold);text-shadow:2px 2px 0 #000;pointer-events:none;animation:dm .9s ease-out forwards}
+@keyframes dm{to{translate:0 -70px;opacity:0;scale:1.5}}
+.mt{height:8px;background:#000;border:1px solid var(--s);margin-top:14px}
+.mt i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--p),var(--s));transition:width 1.6s var(--ease) .3s}
+.cd.in .mt i{width:var(--v)}
+.fac{font:400 .5rem 'Press Start 2P',monospace;float:right;padding:6px 7px;color:#000}
+.fac.i{background:var(--red);color:#fff}.fac.t{background:var(--blue)}
+.note{margin-top:20px;font-size:.9rem;color:var(--mut)}
+.ach{display:flex;gap:14px;align-items:flex-start}
+.ach i{font-style:normal;font-size:2rem;filter:drop-shadow(0 0 10px var(--gold))}
+.save{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:18px 22px;margin-bottom:12px}
+.save b{font:700 1.1rem 'Orbitron',sans-serif}.save span{color:var(--mut)}
+#cont{text-align:center;padding:40px 20px}
+#cont .q9{font:400 clamp(3rem,16vw,8rem)/1 'Press Start 2P',monospace;color:var(--gold);text-shadow:5px 5px 0 var(--p);margin:14px 0}
+#cont .em{font:700 clamp(1.1rem,4.4vw,2.3rem) 'Orbitron',sans-serif;word-break:break-word;color:var(--s);display:inline-block}
+.row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:26px 0 10px}
+footer{position:relative;z-index:2;text-align:center;padding:10px 20px 110px;font-size:.9rem;color:var(--mut)}
+.lvt{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.fig{width:clamp(170px,30vw,290px);flex:none;pointer-events:none;scale:.3;opacity:0;transition:scale .9s var(--spring),opacity .5s}
+.fig.in{scale:1;opacity:1}
+.fig svg{display:block;width:100%;overflow:visible}
+.fig svg *{transform-box:fill-box;transform-origin:center}
+.fig.sp{position:absolute;right:5%;top:0;width:clamp(100px,16vw,160px);scale:1;z-index:0}
+.fig.sp svg{transform-origin:50% 0;animation:swing 3.4s ease-in-out infinite alternate}
+@keyframes swing{from{rotate:-14deg}to{rotate:14deg}}
+.fig svg .sw{transform-origin:50% 5%;animation:asw 1.7s ease-in-out infinite alternate}
+@keyframes asw{from{rotate:-9deg}to{rotate:9deg}}
+.fig svg .sn{animation:sns 2.2s infinite}
+@keyframes sns{0%,60%{opacity:0}70%,85%{opacity:1}100%{opacity:0}}
+.fig svg .tarm{transform-origin:50% 8%;animation:tarm 3.2s ease-in-out infinite}
+@keyframes tarm{0%,6%{rotate:0deg}14%{rotate:-125deg}24%{rotate:-70deg}34%,100%{rotate:0deg}}
+.fig svg .ham{animation:ham 3.2s cubic-bezier(.4,0,.2,1) infinite}
+@keyframes ham{0%,12%{translate:0 0;rotate:0deg}34%{translate:52px -34px;rotate:540deg}44%{translate:52px -34px;rotate:560deg}74%,100%{translate:0 0;rotate:0deg}}
+.fig svg .bz{opacity:0;animation:bz 3.2s infinite}
+@keyframes bz{0%,33%{opacity:0}36%{opacity:1}40%{opacity:.2}43%{opacity:1}48%,100%{opacity:0}}
+.fig svg .fst{animation:smash 2.4s cubic-bezier(.5,0,.3,1) infinite}
+@keyframes smash{0%,10%{translate:0 0}38%{translate:0 -34px}48%{translate:0 10px}58%,100%{translate:0 0}}
+.fig svg .qk{animation:qk 2.4s infinite}
+@keyframes qk{0%,46%{translate:0 0}48%{translate:-4px 3px}52%{translate:4px -2px}56%{translate:-2px 1px}60%,100%{translate:0 0}}
+.fig svg .crk{opacity:0;animation:crk 2.4s infinite}
+@keyframes crk{0%,47%{opacity:0}50%,80%{opacity:1}100%{opacity:0}}
+.fig svg .deb{opacity:0;animation:deb 2.4s ease-out infinite}
+@keyframes deb{0%,47%{opacity:0;translate:0 0}50%{opacity:1}75%{opacity:0;translate:var(--dx) -46px;rotate:200deg}100%{opacity:0}}
+.fig svg .m1{animation:spin 6s linear infinite}
+.fig svg .m2{animation:spin 4s linear reverse infinite}
+.fig svg .shd{animation:shd 3s ease-in-out infinite}
+@keyframes shd{0%,10%{translate:0 0;rotate:0deg}30%{translate:90px -20px;rotate:540deg}45%{translate:40px 30px;rotate:900deg}70%{translate:-6px 0;rotate:1260deg}80%,100%{translate:0 0;rotate:1440deg}}
+.fig svg .claw{transform-origin:50% 10%;animation:claw 2.6s ease-in-out infinite}
+@keyframes claw{0%,15%{rotate:0deg}30%{rotate:-110deg}45%{rotate:30deg}60%,100%{rotate:0deg}}
+.fig svg .slash{opacity:0;stroke-dasharray:90;stroke-dashoffset:90;animation:slsh 2.6s infinite}
+@keyframes slsh{0%,36%{opacity:0;stroke-dashoffset:90}40%{opacity:1}55%{stroke-dashoffset:0;opacity:1}70%,100%{opacity:0;stroke-dashoffset:0}}
+.fig svg .pb{animation:pb 2.6s ease-in-out infinite}
+@keyframes pb{0%,100%{translate:0 0}40%{translate:4px -6px}}
+.fig svg .ib{animation:ib 2.2s ease-in-out infinite}
+@keyframes ib{0%,100%{translate:0 0}50%{translate:0 -8px}}
+.fig svg .beam{transform-origin:0 50%;animation:beam 2.2s infinite}
+@keyframes beam{0%,40%{scale:0 1;opacity:0}46%,62%{scale:1 1;opacity:1}70%,100%{scale:1 .2;opacity:0}}
+.fig svg .fire{transform-origin:50% 0;animation:fire .25s infinite alternate}
+@keyframes fire{from{scale:1 .65}to{scale:1 1.35}}
+.fig svg .arc{animation:arcp 1.4s infinite}
+@keyframes arcp{50%{opacity:.45}}
+.fig:not(.in) svg,.fig:not(.in) svg *{animation-play-state:paused!important}
+@media (max-width:640px){#lvl,.hp{display:none}.bars{width:30vw}#dlg{flex-direction:column}.lv{padding:90px 16px 50px}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}#fx{display:none}.rv{opacity:1;translate:none;scale:1}}
+</style>
+</head>
+<body data-mode="dual">
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="rx" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="50" r="36" fill="none" stroke="currentColor" stroke-width="5" stroke-dasharray="8 4"/><circle cx="50" cy="50" r="24" fill="none" stroke="currentColor" stroke-width="2"/><path d="M50 30 67 60H33Z" fill="currentColor"/><circle cx="50" cy="50" r="6" fill="#fff"/></symbol>
+</defs></svg>
+
+<div id="intro">
+  <button id="skip">SKIP ▶▶</button>
+  <div class="ph on" id="p0"><div class="k">A PORTFOLIO ADVENTURE</div><button id="go">▶ PRESS START</button><div class="k">SOUND ON · TAP TO BEGIN</div></div>
+  <div class="ph" id="p1"><div id="mont"></div></div>
+  <div class="ph" id="p2"><div class="lg">SARTHAK BANYAL</div><div class="pr">PRESENTS</div></div>
+  
+  <div class="ph" id="p4"><div><svg class="rxb av" style="animation-duration:3s"><use href="#rx"/></svg><div class="ln" id="ln"></div><div class="pb"><i id="pbi"></i></div></div></div>
+  <div id="fl"></div>
+</div>
+
+<canvas id="fx"></canvas>
+<div id="toast"></div>
+<div id="hud">
+  <div class="hl"><svg class="av"><use href="#rx"/></svg><div><b>P1 · SARTHAK</b><div class="bars"><div class="bar hp"><i></i></div><div class="bar xp"><i id="xp"></i></div></div></div></div>
+  <div id="lvl">LVL 1 · HOME</div>
+  <div class="hr"><span id="score">0000000</span><button id="snd" aria-label="Toggle sound">🔊</button></div>
+</div>
+<div id="hb"></div>
+
+<header class="hero" id="top">
+  <svg class="reactor" viewBox="0 0 100 100"><g class="r1"><circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" stroke-width=".6" stroke-dasharray="2 3"/></g><g class="r2"><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="10 4"/></g><g class="r3"><circle cx="50" cy="50" r="28" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 2"/></g><g class="core"><path d="M50 32 66 60H34Z" fill="currentColor" opacity=".9"/><circle cx="50" cy="50" r="5" fill="#fff"/></g></svg>
+  <div id="hc">
+    <div class="sel">▶ SELECT YOUR HERO ◀</div>
+    <h1 class="name"><span class="g" data-t="SARTHAK">SARTHAK</span><span class="g" data-t="BANYAL">BANYAL</span></h1>
+    <p class="cls">CLASS: MANUFACTURING ENGINEER · QUALITY · AUTOMATION</p>
+    <div class="duo"><button class="hb" data-m="iron">⚙ IRON</button><button class="hb" data-m="dual">⚡ DUAL ⚙</button><button class="hb" data-m="thor">⚡ THOR</button></div>
+    <div class="sheet"><div class="pn"><b data-v="8.32">8.32</b><span>INT · CGPA</span></div><div class="pn"><b data-v="16+">16+</b><span>LOOT · CERTS</span></div><div class="pn"><b data-v="3">3</b><span>MISSIONS DONE</span></div></div>
+    <div class="scr">SCROLL / TAP / PRESS 1-8 ▼</div>
+  </div>
+</header>
+
+<section class="lv" id="about">
+  <div class='fig sp'><svg viewBox='0 0 120 150' aria-hidden='true'><line x1='60' y1='0' x2='60' y2='16' stroke='#e5e7eb' stroke-width='2'/><g transform='rotate(180 60 71)'><rect x='44' y='94' width='14' height='34' rx='6' fill='#1d4ed8'/><rect x='62' y='94' width='14' height='34' rx='6' fill='#1d4ed8'/><rect x='43' y='118' width='16' height='10' rx='4' fill='#c1121f'/><rect x='61' y='118' width='16' height='10' rx='4' fill='#c1121f'/><rect x='42' y='54' width='36' height='42' rx='8' fill='#c1121f'/><path d='M42 82H78V96H42Z' fill='#1d4ed8'/><g class='sw'><rect x='30' y='56' width='12' height='34' rx='6' fill='#c1121f'/><circle cx='36' cy='92' r='6' fill='#1d4ed8'/></g><g class='sw'><rect x='78' y='56' width='12' height='34' rx='6' fill='#c1121f'/><circle cx='84' cy='92' r='6' fill='#1d4ed8'/></g><circle cx='60' cy='34' r='20' fill='#c1121f'/><path d='M60 14V54M40 34H80M45 20Q60 34 45 48M75 20Q60 34 75 48' stroke='#000' stroke-width='.9' fill='none' opacity='.5'/><ellipse cx='51' cy='36' rx='7' ry='4.5' fill='#fff' stroke='#000' stroke-width='1.6' transform='rotate(18 51 36)'/><ellipse cx='69' cy='36' rx='7' ry='4.5' fill='#fff' stroke='#000' stroke-width='1.6' transform='rotate(-18 69 36)'/><path d='M60 68l-8-6M60 68l8-6M60 68l-8 6M60 68l8 6' stroke='#000' stroke-width='1.4'/><circle cx='60' cy='68' r='3' fill='#000'/></g><g class='sn' stroke='#fff' stroke-width='2' stroke-linecap='round' fill='none'><path d='M28 96l-10-6M26 108h-12M28 120l-10 6M92 96l10-6M94 108h12M92 120l10 6'/></g></svg></div>
+  <div class="lvt rv"><small>LEVEL 02 · HERO: SPIDER-MAN</small><b>ORIGIN STORY</b></div>
+  <div id="dlg" class="pn rv"><div class="pt"><svg><use href="#rx"/></svg></div><div><div class="nm">SARTHAK:</div><p id="dtxt" data-t="I'm a mechanical engineer on Stryker's OrthoTech MET Advanced Operations team, supporting New Product Introduction. My earlier missions at International Tractors Limited covered VMC machining, quality inspection, powertrain testing and root-cause analysis. I'm a Lean Six Sigma Yellow Belt with 16+ medical device quality and regulatory certifications, and I love using manufacturing excellence, quality systems and automation to level up products."></p><span id="dnext">▼</span></div></div>
+  <div class="chips big rv"><span class="chip">Quality Engineering</span><span class="chip">Industrial Robotics</span><span class="chip">Additive Manufacturing</span><span class="chip">Industry 4.0</span></div>
+</section>
+
+<section class="lv" id="experience">
+  <div class="lvt rv"><div><small>LEVEL 03 · HERO: THOR</small><b>MISSIONS</b></div><div class='fig'><svg viewBox='0 0 200 140' aria-hidden='true'><g transform='translate(40 0)'><path d='M42 54Q24 92 34 126L64 100Z' fill='#c1121f'/><rect x='44' y='94' width='14' height='34' rx='5' fill='#2a3150'/><rect x='62' y='94' width='14' height='34' rx='5' fill='#2a3150'/><rect x='42' y='54' width='36' height='42' rx='8' fill='#64748b'/><circle cx='52' cy='68' r='4' fill='#e2e8f0'/><circle cx='68' cy='68' r='4' fill='#e2e8f0'/><rect x='30' y='56' width='12' height='34' rx='6' fill='#cbd5e1'/><g class='tarm'><rect x='78' y='56' width='12' height='34' rx='6' fill='#cbd5e1'/><circle cx='84' cy='92' r='6' fill='#f2c9a0'/></g><circle cx='60' cy='34' r='20' fill='#f2c9a0'/><path d='M38 34Q34 8 60 10Q86 8 82 34Q76 20 60 22Q44 20 38 34Z' fill='#f4d35e'/><path d='M40 32Q36 52 46 58L47 38Z M80 32Q84 52 74 58L73 38Z' fill='#f4d35e'/><circle cx='53' cy='36' r='2.4' fill='#222'/><circle cx='67' cy='36' r='2.4' fill='#222'/><path d='M54 44Q60 49 66 44' stroke='#8a4b2a' fill='none' stroke-width='2'/></g><g class='ham'><rect x='116' y='70' width='32' height='17' rx='3' fill='#9aa5b8' stroke='#475569' stroke-width='2'/><rect x='129' y='87' width='6' height='24' rx='2' fill='#7c4a21'/></g><g class='bz' stroke='#7dd3fc' stroke-width='3' fill='none' stroke-linejoin='round'><polyline points='172,30 180,44 173,46 184,62'/><polyline points='196,40 190,52 198,54'/></g></svg></div></div>
+  <div class="q pn cd rv"><div class="tg">MISSION 03 · STRYKER</div><h3>Advanced Operations (Ortho Tech MET) Intern <span class="st">IN PROGRESS ▶</span></h3><p>Stryker Global Technology Centre, Gurugram · Jul 2026 – Present</p><ul><li>Support manufacturing process validation for NPI activities in a regulated medical-device environment.</li><li>Prepare quality documentation applying ISO 13485, ISO 14971, 21 CFR 820 QMSR, CAPA and GDP.</li><li>Assist automation and fixture development projects that improve manufacturing processes.</li><li>Analyse process and measurement data to support validation and quality decisions.</li></ul><div class="lt">🏆 REWARD: LEAN SIX SIGMA YELLOW BELT (SEP 2026)</div></div>
+  <div class="q pn cd rv"><div class="tg">MISSION 02 · SOLIS WING</div><h3>Manufacturing &amp; Quality Engineer Intern — International Tractors Ltd <span class="st ok">CLEARED ✓</span></h3><p>Hoshiarpur · Jan 2025 – Jul 2025</p><ul><li>Ran VMC machining operations and supported production across tractor and powertrain assembly lines.</li><li>Performed inspection and testing at final inspection for tractor and powertrain assemblies.</li><li>Applied Root Cause Analysis, 5S and Poka-Yoke to resolve shop-floor quality issues.</li><li>Carried out powertrain testing to verify performance, reliability and compliance.</li></ul><div class="lt">🏆 LOOT: RCA · 5S · POKA-YOKE</div></div>
+  <div class="q pn cd rv"><div class="tg">MISSION 01 · SONALIKA WING</div><h3>Manufacturing Engineer Intern — International Tractors Ltd <span class="st ok">CLEARED ✓</span></h3><p>Hoshiarpur · Jun 2023 – Jul 2023</p><ul><li>Operated a VMC machine to manufacture precision Power Take-Off (PTO) components.</li><li>Maintained quality control on machined parts with first-hand exposure to tractor component manufacturing.</li></ul><div class="lt">🏆 LOOT: PRECISION MACHINING</div></div>
+</section>
+
+<section class="lv" id="projects">
+  <div class="lvt rv"><div><small>LEVEL 04 · HERO: HULK · TAP BOSSES TO ATTACK</small><b>BOSS FIGHTS</b></div><div class='fig'><svg viewBox='0 0 200 140' aria-hidden='true'><g class='qk'><g transform='translate(40 0)'><rect x='44' y='98' width='15' height='30' rx='6' fill='#4caf50'/><rect x='61' y='98' width='15' height='30' rx='6' fill='#4caf50'/><rect x='34' y='52' width='52' height='48' rx='15' fill='#5cb85c'/><path d='M36 90H84L88 108H32Z' fill='#7b2cbf'/><g class='fst'><rect x='14' y='56' width='20' height='38' rx='10' fill='#5cb85c'/><circle cx='24' cy='100' r='12' fill='#5cb85c'/><rect x='86' y='56' width='20' height='38' rx='10' fill='#5cb85c'/><circle cx='96' cy='100' r='12' fill='#5cb85c'/></g><circle cx='60' cy='34' r='20' fill='#5cb85c'/><path d='M40 28Q44 8 60 10Q76 8 80 28Q70 18 60 20Q50 18 40 28Z' fill='#1f2937'/><path d='M46 30L58 36M74 30L62 36' stroke='#1f2937' stroke-width='4' stroke-linecap='round'/><circle cx='52' cy='38' r='2.6' fill='#fff'/><circle cx='68' cy='38' r='2.6' fill='#fff'/><rect x='51' y='46' width='18' height='5' rx='2' fill='#fff'/></g></g><path class='crk' d='M100 130L70 124L50 130M100 130L130 122L152 130M100 130L98 138' stroke='#e5e7eb' stroke-width='2.5' fill='none'/><rect class='deb' style='--dx:-30px' x='72' y='120' width='7' height='7' fill='#94a3b8'/><rect class='deb' style='--dx:26px' x='128' y='120' width='9' height='9' fill='#94a3b8'/><rect class='deb' style='--dx:8px' x='102' y='124' width='6' height='6' fill='#94a3b8'/></svg></div></div>
+  <div class="grid">
+    <div class="pn cd boss rv"><div class="tg">BOSS 01 · PERSONAL · AUTOMATION</div><h3>Multipurpose AGROBOT</h3><p>Designed and fabricated one robotic platform that performs seeding, spraying and ploughing, with a mobile-based control system to cut manual labour and boost agricultural productivity.</p><div class="chips"><span class="chip">Mechanical design</span><span class="chip">Fabrication</span><span class="chip">Control integration</span></div><div class="hpb"><i></i></div><div class="df">BOSS DEFEATED ✓</div></div>
+    <div class="pn cd boss rv"><div class="tg">BOSS 02 · QUALITY · 2025</div><h3>AC Cabin NVH Improvement</h3><p>Led inspection and analysis to trace a rattling noise found at final inspection, then applied 5S and Poka-Yoke with corrective actions that improved cabin quality.</p><div class="chips"><span class="chip">Root Cause Analysis</span><span class="chip">5S</span><span class="chip">Poka-Yoke</span></div><div class="hpb"><i></i></div><div class="df">BOSS DEFEATED ✓</div></div>
+    <div class="pn cd boss rv"><div class="tg">BOSS 03 · VALIDATION · 2025</div><h3>Advanced Powertrain Testing</h3><p>Conducted testing and analysis of tractor powertrain systems, verifying performance and reliability and confirming compliance with quality standards.</p><div class="chips"><span class="chip">Powertrain</span><span class="chip">Validation</span></div><div class="hpb"><i></i></div><div class="df">BOSS DEFEATED ✓</div></div>
+  </div>
+</section>
+
+<section class="lv" id="skills">
+  <div class="lvt rv"><div><small>LEVEL 05 · HERO: DOCTOR STRANGE</small><b>POWERS</b></div><div class='fig'><svg viewBox='0 0 200 140' aria-hidden='true'><g transform='translate(40 0)'><path d='M36 54Q16 98 28 128H92Q104 98 84 54Z' fill='#b91c1c'/><rect x='46' y='98' width='12' height='30' rx='5' fill='#1f2937'/><rect x='62' y='98' width='12' height='30' rx='5' fill='#1f2937'/><rect x='44' y='58' width='32' height='40' rx='8' fill='#1e3a8a'/><rect x='44' y='84' width='32' height='6' fill='#92400e'/><path d='M38 50L52 38L60 58L68 38L82 50L74 68H46Z' fill='#dc2626' stroke='#7f1d1d' stroke-width='1.5'/><circle cx='60' cy='34' r='19' fill='#f2c9a0'/><path d='M41 32Q40 12 60 12Q80 12 79 32Q72 22 60 24Q48 22 41 32Z' fill='#1f2937'/><path d='M41 30Q42 24 46 24L45 34Z M79 30Q78 24 74 24L75 34Z' fill='#9ca3af'/><circle cx='53' cy='36' r='2.2' fill='#222'/><circle cx='67' cy='36' r='2.2' fill='#222'/><path d='M56 46Q60 50 64 46Q60 54 56 46Z' fill='#374151'/><circle cx='26' cy='70' r='6' fill='#f2c9a0'/><circle cx='94' cy='70' r='6' fill='#f2c9a0'/></g><g class='m1'><circle cx='66' cy='70' r='24' fill='none' stroke='#ff9f1c' stroke-width='2.5' stroke-dasharray='6 4'/><circle cx='66' cy='70' r='14' fill='none' stroke='#ffd166' stroke-width='1.5'/><path d='M66 54v32M50 70h32' stroke='#ff9f1c' stroke-width='1.5'/></g><g class='m2'><circle cx='134' cy='70' r='24' fill='none' stroke='#ff9f1c' stroke-width='2.5' stroke-dasharray='6 4'/><circle cx='134' cy='70' r='14' fill='none' stroke='#ffd166' stroke-width='1.5'/><path d='M134 54v32M118 70h32' stroke='#ff9f1c' stroke-width='1.5'/></g></svg></div></div>
+  <div class="grid">
+    <div class="pn cd rv" style="--v:90%"><span class="fac i">IRON</span><h3 class="sm">Manufacturing &amp; Machining</h3><div class="chips"><span class="chip">CNC/VMC</span><span class="chip">GD&amp;T</span><span class="chip">Tolerance stack-up</span><span class="chip">DFM/DFA/DFMA</span><span class="chip">Additive Mfg</span></div><div class="mt"><i></i></div></div>
+    <div class="pn cd rv" style="--v:92%"><span class="fac t">THOR</span><h3 class="sm">Metrology &amp; Quality</h3><div class="chips"><span class="chip">CMM</span><span class="chip">SPC</span><span class="chip">Cp/Cpk</span><span class="chip">PFMEA</span><span class="chip">Control Plan</span><span class="chip">8D · Fishbone</span><span class="chip">CAPA</span><span class="chip">V&amp;V</span></div><div class="mt"><i></i></div></div>
+    <div class="pn cd rv" style="--v:86%"><span class="fac t">THOR</span><h3 class="sm">Lean &amp; Improvement</h3><div class="chips"><span class="chip">Lean Six Sigma YB</span><span class="chip">5S</span><span class="chip">Kaizen</span><span class="chip">Poka-Yoke</span></div><div class="mt"><i></i></div></div>
+    <div class="pn cd rv" style="--v:84%"><span class="fac i">IRON</span><h3 class="sm">Automation &amp; Design</h3><div class="chips"><span class="chip">PLC (basics)</span><span class="chip">Industrial Robotics</span><span class="chip">Industry 4.0</span><span class="chip">SOLIDWORKS</span><span class="chip">AutoCAD</span><span class="chip">CAE · CIM</span><span class="chip">Fixtures</span></div><div class="mt"><i></i></div></div>
+    <div class="pn cd rv" style="--v:94%"><span class="fac t">THOR</span><h3 class="sm">Med-Device Regulatory</h3><div class="chips"><span class="chip">ISO 13485</span><span class="chip">ISO 14971</span><span class="chip">21 CFR 820</span><span class="chip">EU MDR</span><span class="chip">Indian MDR</span><span class="chip">MDSAP</span><span class="chip">GDP</span></div><div class="mt"><i></i></div></div>
+    <div class="pn cd rv" style="--v:88%"><span class="fac i">IRON</span><h3 class="sm">Project &amp; Soft Skills</h3><div class="chips"><span class="chip">NPI</span><span class="chip">Agile NPD</span><span class="chip">Problem-solving</span><span class="chip">Leadership</span><span class="chip">Teamwork</span><span class="chip">English · Hindi · Punjabi</span></div><div class="mt"><i></i></div></div>
+  </div>
+  <p class="note rv">*Power levels are 100% vibes and 0% audited.</p>
+</section>
+
+<section class="lv" id="certs">
+  <div class="lvt rv"><div><small>LEVEL 06 · HERO: CAPTAIN AMERICA</small><b>LOOT</b></div><div class='fig'><svg viewBox='0 0 200 140' aria-hidden='true'><g transform='translate(40 0)'><rect x='44' y='94' width='14' height='34' rx='5' fill='#1d4ed8'/><rect x='62' y='94' width='14' height='34' rx='5' fill='#1d4ed8'/><rect x='43' y='118' width='16' height='10' rx='4' fill='#c1121f'/><rect x='61' y='118' width='16' height='10' rx='4' fill='#c1121f'/><rect x='42' y='54' width='36' height='42' rx='8' fill='#1d4ed8'/><rect x='42' y='80' width='36' height='4' fill='#fff'/><rect x='42' y='86' width='36' height='4' fill='#c1121f'/><path d='M60 60l2.4 5.6 6-.6-4.4 4.2 3 5.4-5-3-5 3 3-5.4-4.4-4.2 6 .6Z' fill='#fff'/><rect x='30' y='56' width='12' height='34' rx='6' fill='#1d4ed8'/><rect x='78' y='56' width='12' height='34' rx='6' fill='#1d4ed8'/><circle cx='36' cy='92' r='6' fill='#c1121f'/><circle cx='84' cy='92' r='6' fill='#c1121f'/><circle cx='60' cy='34' r='20' fill='#f2c9a0'/><path d='M40 34Q38 10 60 10Q82 10 80 34L74 32Q60 22 46 32Z' fill='#1d4ed8'/><text x='60' y='25' font-size='11' font-weight='900' text-anchor='middle' fill='#fff' font-family='Arial'>A</text><circle cx='53' cy='38' r='2.4' fill='#222'/><circle cx='67' cy='38' r='2.4' fill='#222'/><path d='M54 46Q60 51 66 46' stroke='#8a4b2a' fill='none' stroke-width='2'/></g><g class='shd'><circle cx='64' cy='88' r='19' fill='#c1121f'/><circle cx='64' cy='88' r='14' fill='#fff'/><circle cx='64' cy='88' r='9' fill='#c1121f'/><circle cx='64' cy='88' r='5.5' fill='#1d4ed8'/></g></svg></div></div>
+  <div class="grid">
+    <div class="pn cd rv ach"><i>🏆</i><div><div class="tg">ACHIEVEMENT UNLOCKED · SEP 2026</div><h3 class="sm">Lean Six Sigma Yellow Belt</h3><p>Stryker Advanced Operations — Certificate of Completion.</p></div></div>
+    <div class="pn cd rv ach"><i>🛡️</i><div><div class="tg">SKILLMED</div><h3 class="sm">Quality Systems &amp; Regulatory</h3><p>ISO 13485:2016, 21 CFR 820 QMSR, MDSAP, EU MDR, Indian MDR, Regulatory Affairs, GDP.</p></div></div>
+    <div class="pn cd rv ach"><i>⚗️</i><div><div class="tg">SKILLMED</div><h3 class="sm">Risk, Validation &amp; Process</h3><p>ISO 14971:2019, CAPA, Process &amp; Packaging Validation, Sterilization Basics, Medical Device Design &amp; Development.</p></div></div>
+    <div class="pn cd rv ach"><i>⚡</i><div><div class="tg">LINKEDIN LEARNING</div><h3 class="sm">Quality, Manufacturing &amp; AI</h3><p>Operational Excellence, Quality Management, Advanced &amp; Additive Manufacturing, Agile NPD, Physical AI Architecture.</p></div></div>
+  </div>
+</section>
+
+<section class="lv" id="education">
+  <div class="lvt rv"><div><small>LEVEL 07 · HERO: BLACK PANTHER · LOAD GAME</small><b>ACADEMY</b></div><div class='fig'><svg viewBox='0 0 200 140' aria-hidden='true'><g class='pb'><g transform='translate(40 0)'><rect x='44' y='94' width='14' height='34' rx='5' fill='#0f0f1a' stroke='#3b2a5e'/><rect x='62' y='94' width='14' height='34' rx='5' fill='#0f0f1a' stroke='#3b2a5e'/><rect x='42' y='54' width='36' height='42' rx='8' fill='#0f0f1a' stroke='#3b2a5e' stroke-width='1.5'/><path d='M48 64L60 76L72 64M60 76V92' stroke='#9b5de5' stroke-width='2' fill='none'/><rect x='30' y='56' width='12' height='34' rx='6' fill='#0f0f1a'/><path d='M44 52Q60 66 76 52' stroke='#cbd5e1' stroke-width='4' stroke-dasharray='5 3' fill='none'/><circle cx='60' cy='34' r='20' fill='#0f0f1a' stroke='#3b2a5e' stroke-width='1.5'/><path d='M42 22L38 2L56 14Z M78 22L82 2L64 14Z' fill='#0f0f1a'/><path d='M46 32L56 36L48 40Z M74 32L64 36L72 40Z' fill='#fff'/><path d='M52 22Q60 26 68 22' stroke='#9b5de5' stroke-width='1.5' fill='none'/></g><g class='claw'><rect x='118' y='56' width='12' height='34' rx='6' fill='#0f0f1a' stroke='#3b2a5e'/><path d='M120 94l-2 16M125 94v18M130 94l2 16' stroke='#e2e8f0' stroke-width='2.5' stroke-linecap='round'/></g><g class='slash' stroke='#e9d5ff' stroke-width='3' fill='none' stroke-linecap='round'><path d='M150 40Q176 60 150 104'/><path d='M160 36Q190 60 160 108'/><path d='M140 46Q164 62 140 100'/></g></g></svg></div></div>
+  <div class="pn save rv"><div><b>SAVE SLOT 1 — M.Tech, Manufacturing &amp; Automation</b><br><span>NIT Hamirpur (H.P.)</span></div><span>8.32 CGPA · 2025 – 2027</span></div>
+  <div class="pn save rv"><div><b>SAVE SLOT 2 — B.Tech, Mechanical Engineering</b><br><span>Guru Nanak Dev University, Amritsar</span></div><span>7.03 CGPA · 2025</span></div>
+  <div class="pn save rv"><div><b>SAVE SLOT 3 — Class XII (Non-Medical), CBSE</b><br><span>Kendriya Vidyalaya No. 1, AFS Adampur</span></div><span>79.6% · 2021</span></div>
+  <div class="pn save rv"><div><b>SAVE SLOT 4 — Class X, CBSE</b><br><span>GMA City Public School, Hoshiarpur</span></div><span>85.6% · 2019</span></div>
+</section>
+
+<section class="lv" id="contact">
+  <div class="lvt rv"><div><small>FINAL LEVEL · HERO: IRON MAN</small><b>HQ</b></div><div class='fig'><svg viewBox='0 0 200 140' aria-hidden='true'><g class='ib'><g transform='translate(40 0)'><rect x='44' y='96' width='14' height='28' rx='5' fill='#c1121f'/><rect x='62' y='96' width='14' height='28' rx='5' fill='#c1121f'/><rect x='43' y='110' width='16' height='14' rx='4' fill='#f4b942'/><rect x='61' y='110' width='16' height='14' rx='4' fill='#f4b942'/><rect x='42' y='54' width='36' height='44' rx='8' fill='#c1121f'/><path d='M42 84H78V98H42Z' fill='#f4b942'/><circle cx='60' cy='70' r='7.5' fill='#67e8f9' class='arc'/><circle cx='60' cy='70' r='3' fill='#fff'/><rect x='30' y='56' width='12' height='34' rx='6' fill='#c1121f'/><circle cx='36' cy='92' r='6' fill='#f4b942'/><rect x='78' y='58' width='36' height='12' rx='6' fill='#c1121f'/><circle cx='116' cy='64' r='6.5' fill='#f4b942'/><circle cx='60' cy='34' r='20' fill='#c1121f'/><path d='M44 30Q60 26 76 30Q76 52 60 56Q44 52 44 30Z' fill='#f4b942'/><path d='M49 34L58 36L50 39Z M71 34L62 36L70 39Z' fill='#fff'/></g><ellipse class='fire' cx='91' cy='132' rx='5' ry='9' fill='#fb923c'/><ellipse class='fire' cx='109' cy='132' rx='5' ry='9' fill='#fbbf24'/><rect class='beam' x='162' y='60' width='38' height='8' rx='4' fill='#67e8f9'/></g></svg></div></div>
+  <div id="cont" class="pn rv">
+    <div class="px" style="font-size:.7rem;color:var(--mut)">CONTINUE?</div>
+    <div class="q9" id="q9">9</div>
+    <a class="em" href="mailto:sarthakbanyal@gmail.com">sarthakbanyal@gmail.com</a>
+    <div class="row"><a class="hb" data-m="iron" href="mailto:sarthakbanyal@gmail.com">▶ YES · EMAIL</a><a class="hb" data-m="thor" href="tel:+918195800682">☎ +91-8195800682</a></div>
+    <p style="color:var(--mut);margin-top:12px">Gurugram, Haryana, India · LinkedIn: Sarthak Banyal</p>
+  </div>
+</section>
+<footer>© 2026 Sarthak Banyal · built with ⚡ and 🔧 · psst: ↑ ↑ ↓ ↓ ← → ← → B A</footer>
+
+<script>
+(function(){
+var D=document,B=D.body,$=function(s){return D.querySelector(s)},$$=function(s){return Array.prototype.slice.call(D.querySelectorAll(s))};
+var rm=matchMedia('(prefers-reduced-motion:reduce)').matches,snd=true,AC=null,tm=[],score=0;
+function T(ms,f){tm.push(setTimeout(f,ms))}
+function ac(){if(!AC)try{AC=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}return AC}
+function tone(f,d,ty,v,sl){if(!snd||!ac())return;var o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime;o.type=ty||'square';o.frequency.setValueAtTime(f,t);if(sl)o.frequency.exponentialRampToValueAtTime(sl,t+d);g.gain.setValueAtTime(v||.05,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d)}
+function noise(d,fq,v){if(!snd||!ac())return;var n=AC.sampleRate*d,b=AC.createBuffer(1,n,AC.sampleRate),a=b.getChannelData(0),i;for(i=0;i<n;i++)a[i]=(Math.random()*2-1)*(1-i/n);var s=AC.createBufferSource(),f=AC.createBiquadFilter(),g=AC.createGain();s.buffer=b;f.type='lowpass';f.frequency.value=fq;g.gain.value=v;s.connect(f);f.connect(g);g.connect(AC.destination);s.start()}
+var sfx={tick:function(){tone(300+Math.random()*500,.04,'square',.025)},boom:function(){noise(1.1,260,.9);tone(70,.9,'sine',.3,30)},zap:function(){noise(.4,3000,.35);tone(1400,.3,'sawtooth',.05,80)},pew:function(){tone(900,.2,'square',.05,160)},coin:function(){tone(988,.07,'square',.05);setTimeout(function(){tone(1319,.25,'square',.05)},70)},lvl:function(){[523,659,784,1047].forEach(function(f,i){setTimeout(function(){tone(f,.12,'square',.05)},i*80)})},whoosh:function(){noise(.7,1200,.4)}};
+function addScore(n){score+=n;$('#score').textContent=('000000'+score).slice(-7)}
+$('#snd').onclick=function(){snd=!snd;this.textContent=snd?'🔊':'🔇'};
+/* intro */
+var intro=$('#intro'),mont=$('#mont'),words=['THUNDER','ARMOR','WORTHY','GENIUS','SIX SIGMA','NPI','ISO 13485','VMC','ROBOTS','QUALITY','MJOLNIR','ARC','LEAN','CAD','CAPA','ASGARD','STARK','WEB-SLING','SHIELD','SMASH','WAKANDA','SORCERY'],tiles=[],run=false;
+function ph(n){$$('.ph').forEach(function(e,i){e.classList.toggle('on',i===n)})}
+function build(){var land=innerWidth>innerHeight,c=land?8:4,r=land?5:8,i,t;mont.style.setProperty('--c',c);mont.style.setProperty('--r',r);mont.innerHTML='';tiles=[];for(i=0;i<c*r;i++){t=D.createElement('div');t.className='t v'+(i%6);t.dataset.w=words[i%words.length];mont.appendChild(t);tiles.push(t)}}
+function flick(){for(var k=0;k<7;k++){var t=tiles[Math.floor(Math.random()*tiles.length)];t.className='t v'+Math.floor(Math.random()*6);t.dataset.w=words[Math.floor(Math.random()*words.length)];void t.offsetWidth;t.classList.add('f')}}
+function flash(){var f=$('#fl');f.classList.remove('on');void f.offsetWidth;f.classList.add('on')}
+function shk(el){el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake')}
+function seq(){$('#skip').style.display='block';ph(1);build();run=true;var d=170;(function tick(){if(!run)return;flick();sfx.tick();d=Math.max(42,d*.93);tm.push(setTimeout(tick,d))})();
+T(2900,function(){run=false;ph(2);sfx.boom();shk(intro)});
+T(4300,function(){flash();shk(intro);sfx.zap();ph(3);boot()});
+T(6600,end)}
+function boot(){var L=['J.A.R.V.I.S. ONLINE ✓','MJOLNIR LIFT TEST: WORTHY ✓','LOADING SKILLS … 100%','SUIT + STORM: SYNCED ✓'],ln=$('#ln');ln.innerHTML='';L.forEach(function(s,i){T(i*420,function(){var d=D.createElement('div');d.textContent='> '+s;ln.appendChild(d);sfx.coin()})});setTimeout(function(){$('#pbi').style.width='100%'},60)}
+function end(){tm.forEach(clearTimeout);run=false;flash();sfx.whoosh();intro.classList.add('out');B.classList.add('live');setTimeout(function(){intro.style.display='none'},1000);setTimeout(function(){strike(innerWidth/2,innerHeight*.45)},350);$$('.sheet b').forEach(cnt)}
+$('#go').onclick=function(){ac();if(rm){end();return}seq()};
+$('#skip').onclick=end;
+function cnt(b){var raw=b.dataset.v,m=raw.match(/^([\d.]+)(.*)$/),v=parseFloat(m[1]),dec=(m[1].split('.')[1]||'').length,t0=performance.now();(function f(t){var k=Math.min(1,(t-t0)/1600),e=1-Math.pow(1-k,4);b.textContent=(v*e).toFixed(dec)+m[2];if(k<1)requestAnimationFrame(f)})(t0)}
+/* modes */
+$$('.hb[data-m]').forEach(function(b){b.addEventListener('click',function(){if(b.tagName==='A')return;B.dataset.mode=b.dataset.m;sfx.coin();addScore(25)})});
+/* levels */
+var ids=['top','about','experience','projects','skills','certs','education','contact'],names=['HOME','ORIGIN','MISSIONS','BOSSES','POWERS','LOOT','ACADEMY','HQ'],secs=ids.map(function(i){return D.getElementById(i)}),seen={},act=-1,first=true;
+var hb=$('#hb');ids.forEach(function(id,i){var a=D.createElement('a');a.className='sl';a.href='#'+id;a.innerHTML=(i+1)+'<span>'+names[i]+'</span>';hb.appendChild(a)});var slots=$$('.sl');
+var toast=$('#toast'),tx;function say(i){toast.innerHTML='<small>LEVEL '+(i+1)+'</small>'+names[i];toast.classList.add('show');clearTimeout(tx);tx=setTimeout(function(){toast.classList.remove('show')},1700);sfx.lvl();if(!seen[i]){seen[i]=1;addScore(100)}}
+var cancel=false;function ease(k){return k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2}
+function replay(s){var els=$$('#'+s.id+' .rv');els.forEach(function(e){e.style.transition='none';e.classList.remove('in')});void s.offsetWidth;els.forEach(function(e,i){setTimeout(function(){e.style.transition='';e.style.setProperty('--d','0s');e.classList.add('in')},40+i*80)})}
+function jump(i){var el=secs[i];if(!el)return;var y=i?el.getBoundingClientRect().top+scrollY:0,f=scrollY,d=y-f;if(rm||Math.abs(d)<4){scrollTo({top:y,behavior:'instant'});return}var dur=Math.min(1400,600+Math.abs(d)*.3),t0=performance.now(),rp=false;cancel=false;(function st(t){if(cancel)return;var k=Math.min(1,(t-t0)/dur);scrollTo({top:f+d*ease(k),behavior:'instant'});if(k>.7&&!rp){rp=true;replay(el)}if(k<1)requestAnimationFrame(st);else{var r=slots[i].getBoundingClientRect();strike(r.left+r.width/2,innerHeight-60)}})(t0)}
+D.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;e.preventDefault();var i=ids.indexOf(a.getAttribute('href').slice(1));if(i>-1)jump(i)});
+['wheel','touchstart'].forEach(function(n){addEventListener(n,function(){cancel=true},{passive:true})});
+var kk=[38,38,40,40,37,39,37,39,66,65],kp=0;
+addEventListener('keydown',function(e){cancel=true;if(!B.classList.contains('live'))return;var n=parseInt(e.key,10);if(n>=1&&n<=8)jump(n-1);if(e.keyCode===kk[kp]){kp++;if(kp===kk.length){kp=0;godmode()}}else kp=e.keyCode===kk[0]?1:0});
+function godmode(){toast.innerHTML='<small>CHEAT ACTIVATED</small>GOD MODE ⚡';toast.classList.add('show');setTimeout(function(){toast.classList.remove('show')},2200);addScore(9999);for(var i=0;i<8;i++)setTimeout(function(){strike(Math.random()*innerWidth,innerHeight*(.3+Math.random()*.6))},i*180)}
+/* reveal */
+$$('.grid,.q').forEach(function(g){Array.prototype.slice.call(g.children).forEach(function(c,i){c.style.setProperty('--d',(i%4*.1)+'s')})});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15,rootMargin:'0px 0px -6% 0px'});
+$$('.rv').forEach(function(el){io.observe(el)});
+var fio=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('in',e.isIntersecting)})},{threshold:.2});$$('.fig').forEach(function(f){fio.observe(f)});
+/* dialog typewriter */
+var dt=$('#dtxt'),full=dt.dataset.t,typed=false,ti,dn=$('#dnext');
+function type(){if(typed)return;typed=true;var i=0;if(rm){dt.textContent=full;dn.classList.add('on');return}ti=setInterval(function(){i+=2;dt.textContent=full.slice(0,i);if(i%6===0)tone(520,.02,'square',.015);if(i>=full.length){clearInterval(ti);dn.classList.add('on')}},18)}
+new IntersectionObserver(function(es,o){if(es[0].isIntersecting){type();o.disconnect()}},{threshold:.4}).observe($('#dlg'));
+$('#dlg').onclick=function(){clearInterval(ti);dt.textContent=full;typed=true;dn.classList.add('on')};
+/* bosses */
+$$('.boss').forEach(function(b){b.addEventListener('pointerdown',function(e){b.classList.remove('hit');void b.offsetWidth;b.classList.add('hit');var d=D.createElement('div');d.className='dmg';d.textContent=['-9999','OVERKILL!','POW!','CRIT!!','K.O.'][Math.floor(Math.random()*5)];d.style.left=e.clientX-30+'px';d.style.top=e.clientY-20+'px';B.appendChild(d);setTimeout(function(){d.remove()},950);addScore(50)})});
+/* continue countdown */
+var q9=$('#q9'),n9=9;setInterval(function(){n9=n9<=0?9:n9-1;q9.textContent=n9;if(n9===0)q9.textContent='0';if(n9<4&&$('#cont').classList.contains('in'))tone(440,.08,'square',.03)},1000);
+/* canvas fx */
+var cv=$('#fx'),c=cv.getContext('2d'),W,H,dpr=Math.min(devicePixelRatio||1,1.5),bolts=[],rings=[],sparks=[],emb=[],fl=0,fr=0,alt=0,MC={dual:['#e5202e','#38bdf8'],iron:['#e5202e','#ffc233'],thor:['#38bdf8','#e0f2fe']};
+function size(){W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;c.setTransform(dpr,0,0,dpr,0,0);while(emb.length<(W<640?24:46))emb.push({x:Math.random()*W,y:Math.random()*H,v:.3+Math.random()*.8,r:.8+Math.random()*1.8,k:Math.random()})}
+size();addEventListener('resize',size);
+function mk(x0,y0,x1,y1,w,col){var pts=[[x0,y0]],n=12,dx=x1-x0,dy=y1-y0,len=Math.hypot(dx,dy)||1,nx=-dy/len,ny=dx/len,i;for(i=1;i<n;i++){var t=i/n,o=(Math.random()-.5)*80*Math.sin(t*Math.PI);pts.push([x0+dx*t+nx*o,y0+dy*t+ny*o])}pts.push([x1,y1]);var b={pts:pts,w:w,col:col,br:[]};if(w>1.5)for(i=0;i<3;i++){var q=pts[2+Math.floor(Math.random()*(n-4))];b.br.push(mk(q[0],q[1],q[0]+(Math.random()-.5)*240,q[1]+60+Math.random()*140,w*.5,col))}return b}
+function db(b,l){c.beginPath();b.pts.forEach(function(p,i){i?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1])});c.shadowBlur=22;c.shadowColor=b.col;c.strokeStyle=b.col;c.globalAlpha=l*.7;c.lineWidth=b.w*3*l+1;c.stroke();c.shadowBlur=0;c.strokeStyle='#fff';c.globalAlpha=l;c.lineWidth=b.w*l+.4;c.stroke();b.br.forEach(function(x){db(x,l)})}
+function burst(x,y,col,n){for(var i=0;i<n;i++){var a=Math.random()*6.283,s=2+Math.random()*6;sparks.push({x:x,y:y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,l:1,col:col})}}
+function strike(x,y,quiet){var m=MC[B.dataset.mode];if(B.dataset.mode==='iron'){blast(x,y,quiet);return}bolts.push({b:mk(x+(Math.random()-.5)*160,-10,x,y,3.2,m[1]),l:1});rings.push({x:x,y:y,r:0,col:m[1]});burst(x,y,m[1],16);fl=quiet?.12:.35;if(!quiet){shk(B);sfx.zap()}}
+function blast(x,y,quiet){var m=MC.iron;rings.push({x:x,y:y,r:0,col:m[1]},{x:x,y:y,r:-14,col:m[0]});burst(x,y,m[1],22);bolts.push({b:{pts:[[x,H+10],[x,y]],w:4,col:m[1],br:[]},l:1});fl=.2;if(!quiet){sfx.pew();shk(B)}}
+addEventListener('pointerdown',function(e){if(!B.classList.contains('live'))return;addScore(10);var d=B.dataset.mode;if(d==='dual'){alt^=1;alt?strike(e.clientX,e.clientY):blast(e.clientX,e.clientY)}else if(d==='iron')blast(e.clientX,e.clientY);else strike(e.clientX,e.clientY)});
+var sy=0,hc=$('#hc'),rxs=$('.reactor'),tops=[];
+function loop(){requestAnimationFrame(loop);fr++;sy=scrollY;
+if(B.classList.contains('live')){var p=Math.min(1,sy/(innerHeight*.8));hc.style.opacity=1-p;hc.style.transform='translateY('+(p*60)+'px) scale('+(1-p*.08)+')';rxs.style.transform='translate(-50%,calc(-50% + '+(sy*.3)+'px)) scale('+(1+p*.3)+')';
+var dh=D.documentElement.scrollHeight-innerHeight;$('#xp').style.transform='scaleX('+(dh>0?sy/dh:0)+')';
+var y=sy+innerHeight*.45,i=0,k;for(k=0;k<secs.length;k++)if(secs[k].getBoundingClientRect().top+sy<=y)i=k;
+if(i!==act){act=i;slots.forEach(function(s,q){s.classList.toggle('on',q===i)});$('#lvl').textContent='LVL '+(i+1)+' · '+names[i];if(!first)say(i);first=false}
+if(fr%480===0&&!rm&&B.dataset.mode!=='iron')strike(Math.random()*W,H*(.4+Math.random()*.4),true)}
+if(rm)return;
+c.clearRect(0,0,W,H);var mc=MC[B.dataset.mode],j;c.globalAlpha=1;
+if(fl>.01){c.fillStyle='rgba(255,255,255,'+fl+')';c.fillRect(0,0,W,H);fl*=.86}
+for(j=0;j<emb.length;j++){var e=emb[j];e.y-=e.v;e.x+=Math.sin((fr+e.k*300)/50)*.3;if(e.y<-5){e.y=H+5;e.x=Math.random()*W}c.globalAlpha=.55;c.fillStyle=e.k>.5?mc[1]:mc[0];c.beginPath();c.arc(e.x,e.y,e.r,0,6.283);c.fill()}
+for(j=bolts.length-1;j>=0;j--){var b=bolts[j];b.l-=.045;if(b.l<=0){bolts.splice(j,1);continue}db(b.b,b.l)}
+c.shadowBlur=0;
+for(j=rings.length-1;j>=0;j--){var r=rings[j];r.r+=9;if(r.r>220){rings.splice(j,1);continue}if(r.r>0){c.globalAlpha=1-r.r/220;c.strokeStyle=r.col;c.lineWidth=3;c.beginPath();c.arc(r.x,r.y,r.r,0,6.283);c.stroke()}}
+for(j=sparks.length-1;j>=0;j--){var s=sparks[j];s.x+=s.vx;s.y+=s.vy;s.vy+=.15;s.vx*=.97;s.l-=.03;if(s.l<=0){sparks.splice(j,1);continue}c.globalAlpha=s.l;c.fillStyle=s.col;c.fillRect(s.x,s.y,3,3)}
+c.globalAlpha=1}
+loop();
+})();
+</script>
+</body>
+</html>
